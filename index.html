@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang ="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="vocaapp.css">
+
+	<title>암기장</title>
+	<!-- img src="https://182.227.118.59/folio.png" alt="no image" -->
+</head>
+
+
+
+<body>
+
+
+	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+	<script src=https://cdnjs.cloudflare.com/ajax/libs/xls/0.7.4-a/xls.js></script-->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="voca_api.js"></script>
+	<script src="app.js"></script>
+	<script src="vocalist.js"></script>
+	<script src="voca.js"></script>
+  
+<!-- ***************************************************************  -->
+<!-- **                         MAIN STATE                        **  -->
+<!-- ***************************************************************  -->
+	<div id="display_appstate_main" class="container px-4 py-5 my-5 text-center">
+		<h1 class='display-5 fw-bold'>Web-Flash-Cards</h1>
+		<p class = "lead mb-4 col-lg-6 mx-auto">
+			Web-Flash-Cards gives you a complete access to your flashcards with any devices you want.
+			This site is built on a single page so gives you a native-app like user interface. </p>
+		<br>
+
+		<button type="button" class="btn btn-primary btn-appstate-ctrl col-lg-6 mx-auto" onclick="app_state_transit_select_vocalist()">
+			 Study now
+		</button>
+		<br>
+		<button type="button" class="btn btn-outline-secondary btn-appstate-ctrl col-lg-6 mx-auto" onclick="app_state_transit_add_vocalist()">
+			 Add new flashcards
+		</button>
+		<br>
+		<button type="button" class="btn btn-outline-secondary btn-appstate-ctrl col-lg-6 mx-auto" onclick="app_state_transit_modify()"> 
+			Add new voca to existing flashcards 
+		</button>
+		<br>
+
+
+
+	</div>
+<!-- ***************************************************************  -->
+<!-- **                 SELECT VOCALIST    STATE                  **  -->
+<!-- ***************************************************************  -->
+	<div id="display_appstate_select_vocalist">
+		<h3 class="text-center fw-bold">Choose vocalist to study</h1>
+		<div id="sub_select_vocalist" class="vocalist_wrapper">
+
+		</div>
+	</div>	
+
+	<div id="display_appstate_study">
+		<div class="container">
+			<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+				<h3 id = "progress_view"> progress </h3>
+			</header>
+		</div>
+
+		<h3 id = "foreign_voca">
+			foreign
+		</h3>
+		<h3 id = "native_voca">
+			native
+		</h3>
+		<div class="d-grid gap-2">
+			<button type="button" class="btn btn-primary" id = "toggle_visible_answer" onclick="toggle_visible_answer()"> Answer </button> 
+			<button type="button" class="btn btn-primary" onclick="show_next_voca()"> I know </button> 
+			<button type="button" class="btn btn-primary" onclick="show_next_voca_dont_know()"> I don't know </button>		
+		</div>
+		<div id="sub_study"></div>
+
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+		<button type="button" class="btn btn-primary" onclick="app_state_transit_modify()"> statetransit_modify </button>
+		<button type="button" class="btn btn-primary" onclick="app_state_transit_main()"> statetransit_main </button>
+	</div>
+
+<!-- ***************************************************************  -->
+<!-- **                  ADD VOCA IN VOCALIST STATE               **  -->
+<!-- ***************************************************************  -->
+	<div id="display_appstate_modify">
+
+		<label for="newVoca_vocaListName"> Add Flash card to :</label>
+		<input type="text" id="newVoca_vocaListName">
+		<br><br>
+		
+		insert voca from file(you can add flashcard after you create list)<br>
+		<input type="file" id = "my_file_input" class="btn btn-outline-secondary btn-appstate-ctrl col-lg-6 mx-auto">		</input>
+		<br>
+		<button type="button" class="btn btn-primary" onclick="parse_vocalist_from_file()"> Add from file </button>
+		
+		<br><br>
+		<br>
+		... Or you can just add flashcard one by one <br><br>
+
+
+		<label for="newVoca_FVoca">Add voca :</label><br>
+		<!--input type="text" id="newVoca_FVoca" size="200"-->
+		<textarea name="textarea" id = "newVoca_FVoca" style="width:250px;height:150px;"></textarea>
+		<br>
+		<label for="newVoca_NVoca">Answer of voca :</label><br>
+		<!--input type="text" id="newVoca_NVoca" size="200"-->
+		<textarea name="textarea" id = "newVoca_NVoca" style="width:250px;height:150px;"></textarea>
+		<br>
+
+		<p id="add_voca_state"></p>
+
+		<button type="button" class="btn btn-primary" onclick="add_voca_to_vocalist()"> ADD! </button> <br><br>
+		<button type="button" class="btn btn-primary" onclick="app_state_transit_main()"> statetransit_main </button> <br>
+		<button type="button" class="btn btn-primary" onclick="display_appstate_add_vocalist()"> statetransit_modify </button>
+	</div>
+
+<!-- ***************************************************************  -->
+<!-- **                      ADD VOCALIST STATE                   **  -->
+<!-- ***************************************************************  -->
+
+	<div id = "display_appstate_add_vocalist">
+		<br>
+		Make your own flash-cards <br>
+		<label for="vocalist_name">name:</label>
+		<input type="text" id="vocalist_name">
+		<button type="button" class="btn btn-primary" onclick="create_new_vocalist()"> CREATE </button>
+		<br><br>
+
+
+		<br><br>
+
+	</div>
+<!-- ***************************************************************  -->
+<!-- **                   MODIFY VOCALIST STATE                   **  -->
+<!-- ***************************************************************  -->
+	<div id="display_appstate_modify_vocalist">
+		modify_vocalist 
+
+		<div id = "modify_vocalist">
+
+		</div>
+		<div id = "modify_vocalist_name"></div>
+	</div>
+
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+
+<!-- ***************************************************************  -->
+<!-- **                          FOOTER                           **  -->
+<!-- ***************************************************************  -->
+<footer>
+	<div class="container bd-footer text-muted text-center">
+		<p>Copyright @2021 foli.link all rights reserved. <br> Contact webmaster for more information. 010-2939-2245</p>
+	</div>
+
+
+</footer>
+
+</html>

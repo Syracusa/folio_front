@@ -1,0 +1,88 @@
+ .vocalist_wrapper{
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(180px, auto));
+    /* grid-auto-columns: 300px; */
+    
+    grid-template-rows: auto;
+    gap: 3px;
+
+    align-items: center;
+    justify-items: center;
+    padding: 3px; 
+} 
+.btn{
+    margin : 1px;
+}
+/* 
+.btn-main-ctrl{
+   width: max-content;
+} */
+
+.card-body-vli{
+    padding: 1px;
+}
+
+.cl-btn-vli{
+    font-size: xx-small;
+}
+.vli-card-footer{
+    padding: 1px;
+    line-height: 12px;
+}
+.class_dynamicbutton_study_vocalist{
+    padding: 1px; 
+}
+.card-text-lowmargin{
+    margin-bottom: 1px;
+}
+.card-title-lowmargin{
+    margin-bottom: 1px;  
+}
+.vocalist_div{
+    display: grid;
+    gap: 5px;
+    /* grid-template-columns: repeat(3, 1fr); */
+
+    /* align-items: stretch;
+    justify-items: stretch; */
+    /* border-radius: 5px;
+    border: 2px solid #73AD21;  */
+    padding: 5px; 
+}
+/* 
+.vli_btn{
+    width: 110px;
+}
+
+.div_vocalist_info{
+    width: 350px;
+    grid-column: 1 / 4;
+    grid-row: 1 / 2;
+
+}
+.div_vocalist_study{
+    width: 110px;
+
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+
+}
+.div_vocalist_modify{
+    width: 110px;
+
+
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+.div_vocalist_delete{
+    width: 110px;
+
+
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+} */
+
+.vocalist_div{
+    width : 180px;
+}
